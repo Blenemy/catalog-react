@@ -2,14 +2,10 @@ import { Link, LinkProps, useSearchParams } from 'react-router-dom';
 import { getSearchWith, SearchParams } from './SearchParams';
 
 type Props = Omit<LinkProps, 'to'> & {
-  params: SearchParams,
+  params: SearchParams;
 };
 
-export const SearchLink: React.FC<Props> = ({
-  children,
-  params,
-  ...props
-}) => {
+export const SearchLink: React.FC<Props> = ({ children, params, ...props }) => {
   const [searchParams] = useSearchParams();
 
   return (

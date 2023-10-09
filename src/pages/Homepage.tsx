@@ -5,10 +5,11 @@ import { ProductsSlider } from '../components/ProductSlider/ProductSlider';
 import { ShopCategory } from '../components/ShopCategory/ShopCategory';
 
 export const Homepage: React.FC = () => {
-  const { products } = useAppSelector(state => state.products);
+  const { products } = useAppSelector((state) => state.products);
   const getHotPriceProducts = useMemo(() => {
-    return [...products]
-      .sort((a, b) => (b.fullPrice - b.price) - (a.fullPrice - a.price));
+    return [...products].sort(
+      (a, b) => b.fullPrice - b.price - (a.fullPrice - a.price),
+    );
   }, [products]);
 
   const getBrandNewProducts = useMemo(() => {
@@ -19,10 +20,7 @@ export const Homepage: React.FC = () => {
     <main className="homepage">
       <div className="homepage__content">
         <MainSlider />
-        <ProductsSlider
-          products={getHotPriceProducts}
-          title="Hot prices"
-        />
+        <ProductsSlider products={getHotPriceProducts} title="Hot prices" />
         <ShopCategory />
         <ProductsSlider
           products={getBrandNewProducts}

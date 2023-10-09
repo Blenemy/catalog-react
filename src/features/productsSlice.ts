@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Product } from '../types/Products';
 
 type ProductsState = {
-  products: Product[],
+  products: Product[];
 };
 
 const InitialState: ProductsState = {

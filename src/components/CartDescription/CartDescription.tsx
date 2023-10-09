@@ -8,9 +8,9 @@ import './CartDescription.scss';
 import { useAppSelector } from '../../app/hooks';
 
 type Props = {
-  phone: Product,
-  handleDeleteClick: (name: string) => void,
-  updateCart: (updatedCart: Product[]) => void,
+  phone: Product;
+  handleDeleteClick: (name: string) => void;
+  updateCart: (updatedCart: Product[]) => void;
 };
 
 export const CartDescription: React.FC<Props> = ({
@@ -18,11 +18,9 @@ export const CartDescription: React.FC<Props> = ({
   handleDeleteClick,
   updateCart,
 }) => {
-  const {
-    image, name, price, quantity,
-  } = phone;
+  const { image, name, price, quantity } = phone;
   const [count, setCount] = useState(quantity || 1);
-  const { user } = useAppSelector(state => state.user);
+  const { user } = useAppSelector((state) => state.user);
   const userId = user?.id;
 
   useEffect(() => {
@@ -71,7 +69,7 @@ export const CartDescription: React.FC<Props> = ({
             })}
             onClick={() => {
               if (count > 1) {
-                setCount(prev => prev - 1);
+                setCount((prev) => prev - 1);
               }
             }}
           >
@@ -86,17 +84,14 @@ export const CartDescription: React.FC<Props> = ({
             })}
             onClick={() => {
               if (count >= 1) {
-                setCount(prev => prev + 1);
+                setCount((prev) => prev + 1);
               }
             }}
           >
             +
           </button>
         </div>
-        <div className="column-cart-description__price">
-          $
-          {price * count}
-        </div>
+        <div className="column-cart-description__price">${price * count}</div>
       </div>
     </div>
   );

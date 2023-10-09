@@ -1,5 +1,5 @@
 import { User } from '../../types/User';
-import { client } from '../AuthForm/fetchClient';
+import { client } from '../../helpers/fetchClient';
 
 export const getUserByEmail = async (email: string) => {
   const users = await client.get<User[]>(`/users?email=${email}`);

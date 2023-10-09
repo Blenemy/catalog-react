@@ -3,12 +3,13 @@ import home from '../../images/Home.svg';
 import './PageIndicator.scss';
 
 type Props = {
-  productName?: string,
-  productType: string,
+  productName?: string;
+  productType: string;
 };
 
 export const PageIndicator: React.FC<Props> = ({
-  productName, productType,
+  productName,
+  productType,
 }) => {
   return (
     <div
@@ -21,7 +22,12 @@ export const PageIndicator: React.FC<Props> = ({
         </Link>
       </div>
       <div className="indicator-name__arrow">&lt;</div>
-      <Link to={`/${productType.toLowerCase()}`} className="indicator-name__title">{productType}</Link>
+      <Link
+        to={`/${productType.toLowerCase()}`}
+        className="indicator-name__title"
+      >
+        {productType}
+      </Link>
       {productName && (
         <>
           <div className="indicator-name__arrow">&lt;</div>

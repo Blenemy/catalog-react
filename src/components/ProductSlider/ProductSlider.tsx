@@ -4,8 +4,8 @@ import { ProductCard } from '../ProductCard/ProductCard';
 import './ProductSlider.scss';
 
 type Props = {
-  products: Product[],
-  title: string,
+  products: Product[];
+  title: string;
 };
 
 export const ProductsSlider = React.memo(({ title, products }: Props) => {
@@ -58,7 +58,7 @@ export const ProductsSlider = React.memo(({ title, products }: Props) => {
             transition: 'transform ease-out 0.45s',
           }}
         >
-          {products.map(item => (
+          {products.map((item) => (
             <ProductCard card={item} key={item.id} />
           ))}
         </div>

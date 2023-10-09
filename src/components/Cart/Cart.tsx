@@ -8,13 +8,13 @@ import { NoResults } from '../NoResults/NoResults';
 import { useAppSelector } from '../../app/hooks';
 
 export const Cart: React.FC = () => {
-  const { user } = useAppSelector(state => state.user);
+  const { user } = useAppSelector((state) => state.user);
   const userId = user?.id;
   const retrievedData = localStorage.getItem(`cart-${userId}`);
   const cartFromStorage = retrievedData ? JSON.parse(retrievedData) : [];
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const [cartPhones, setCartPhones] = useState<Product []>(cartFromStorage);
+  const [cartPhones, setCartPhones] = useState<Product[]>(cartFromStorage);
   const [checkout, setCheckout] = useState(false);
   let timeoutId: NodeJS.Timeout | null = null;
 
@@ -28,13 +28,13 @@ export const Cart: React.FC = () => {
 
   const calculateTotal = (cartArray: Product[]) => {
     const newTotalPrice = cartArray.reduce(
-      (sum: number, item: Product) => (
-        sum + item.price * (item.quantity || 1)
-      ),
+      (sum: number, item: Product) => sum + item.price * (item.quantity || 1),
       0,
     );
-    const newTotalItems = cartArray
-      .reduce((sum: number, item: Product) => sum + (item.quantity || 1), 0);
+    const newTotalItems = cartArray.reduce(
+      (sum: number, item: Product) => sum + (item.quantity || 1),
+      0,
+    );
 
     setTotalPrice(newTotalPrice);
     setTotalItems(newTotalItems);
@@ -47,7 +47,7 @@ export const Cart: React.FC = () => {
   };
 
   const handleDeleteClick = (name: string) => {
-    const updatedCart = cartPhones.filter(product => product.name !== name);
+    const updatedCart = cartPhones.filter((product) => product.name !== name);
 
     updateCart(updatedCart);
     window.dispatchEvent(new Event('cartUpdated'));
@@ -69,7 +69,7 @@ export const Cart: React.FC = () => {
         {cartPhones.length > 0 ? (
           <div className="cart-page__row">
             <div className="cart-page__column cart-page__column_big">
-              {cartPhones.map(phone => (
+              {cartPhones.map((phone) => (
                 <CartDescription
                   key={phone.id}
                   phone={phone}
@@ -109,8 +109,9 @@ export const Cart: React.FC = () => {
               )}
             </div>
           </div>
-        ) : <NoResults category="cart" />}
-
+        ) : (
+          <NoResults category="cart" />
+        )}
       </div>
     </main>
   );

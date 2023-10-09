@@ -1,7 +1,7 @@
 const BASE_URL = 'https://mate.academy/students-api';
 
 function wait(delay: number) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, delay);
   });
 }
@@ -24,7 +24,7 @@ function request<T>(
 
   return wait(300)
     .then(() => fetch(BASE_URL + url, options))
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
         throw new Error();
       }

@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductDetails, API_PRODUCT_URL } from '../../helpers/helper';
-import { ProductsSlider } from '../ProductSlider/ProductSlider';
-import { PageIndicator } from '../PageIndicator/PageIndicator';
 import { ProductInfoDetails } from './ProductInfoDetails/ProductInfoDetails';
-import { Loader } from '../Loader/Loader';
-import { BackToPage } from '../BackToPage/BackToPage';
 import './ProductDetailsPage.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { TechSpecs } from './TechSpecs/TechSpecs';
@@ -15,11 +11,15 @@ import {
   setProduct,
   setColor,
 } from '../../features/productInfoSlice';
+import { Loader } from '../../components/Loader/Loader';
+import { PageIndicator } from '../../components/PageIndicator/PageIndicator';
+import { BackToPage } from '../../components/BackToPage/BackToPage';
+import { ProductsSlider } from '../../components/ProductSlider/ProductSlider';
 
 export const ProductDetailsPage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { products } = useAppSelector(state => state.products);
-  const { productInfo } = useAppSelector(state => state.productInfo);
+  const { products } = useAppSelector((state) => state.products);
+  const { productInfo } = useAppSelector((state) => state.productInfo);
   const [isLoading, setIsLoading] = useState(true);
   const { productId } = useParams();
 
@@ -27,7 +27,9 @@ export const ProductDetailsPage: React.FC = () => {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const response = await getProductDetails(`${API_PRODUCT_URL}products/${productId}.json`);
+        const response = await getProductDetails(
+          `${API_PRODUCT_URL}products/${productId}.json`,
+        );
 
         dispatch(setProduct(response));
         dispatch(setColor(response.color));
@@ -47,9 +49,7 @@ export const ProductDetailsPage: React.FC = () => {
       return <Loader />;
     }
 
-    return (
-      <div>somewthing went wrong</div>
-    );
+    return <div>somewthing went wrong</div>;
   }
 
   return (
@@ -58,10 +58,7 @@ export const ProductDetailsPage: React.FC = () => {
         <Loader />
       ) : (
         <div className="product-info__container">
-          <PageIndicator
-            productName={productInfo.name}
-            productType="Phones"
-          />
+          <PageIndicator productName={productInfo.name} productType="Phones" />
           <BackToPage />
           <div className="product-info__title">{productInfo.name}</div>
           <ProductInfoDetails />

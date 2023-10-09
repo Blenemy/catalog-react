@@ -9,11 +9,11 @@ import favouriteAdded from '../../images/favourites-added.svg';
 import { useAppSelector } from '../../app/hooks';
 
 type Props = {
-  card: Product,
+  card: Product;
 };
 
 export const ProductCard: React.FC<Props> = ({ card }) => {
-  const { user } = useAppSelector(state => state.user);
+  const { user } = useAppSelector((state) => state.user);
   const userId = user?.id;
   const [isClicked, setIsClicked] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
@@ -22,23 +22,23 @@ export const ProductCard: React.FC<Props> = ({ card }) => {
     const favourites = localStorage.getItem(`favourites-${userId}`);
     const favouritesArray = favourites ? JSON.parse(favourites) : [];
 
-    setIsAdded(favouritesArray
-      .some(({ id }: Product) => id === card.id));
+    setIsAdded(favouritesArray.some(({ id }: Product) => id === card.id));
 
     const cartItems = localStorage.getItem(`cart-${userId}`);
     const cartArray = cartItems ? JSON.parse(cartItems) : [];
 
-    setIsClicked(cartArray
-      .some(({ id }: Product) => id === card.id));
+    setIsClicked(cartArray.some(({ id }: Product) => id === card.id));
   }, [card]);
 
   const saveFavouritesOnClick = () => {
     const getFavoritesByKey = localStorage.getItem(`favourites-${userId}`);
-    const getFavoritesByKeyArray
-       = getFavoritesByKey ? JSON.parse(getFavoritesByKey) : [];
+    const getFavoritesByKeyArray = getFavoritesByKey
+      ? JSON.parse(getFavoritesByKey)
+      : [];
 
-    const index = getFavoritesByKeyArray
-      .findIndex(({ id }: Product) => id === card.id);
+    const index = getFavoritesByKeyArray.findIndex(
+      ({ id }: Product) => id === card.id,
+    );
 
     if (index === -1) {
       getFavoritesByKeyArray.push(card);
@@ -48,7 +48,10 @@ export const ProductCard: React.FC<Props> = ({ card }) => {
       setIsAdded(false);
     }
 
-    localStorage.setItem(`favourites-${userId}`, JSON.stringify(getFavoritesByKeyArray));
+    localStorage.setItem(
+      `favourites-${userId}`,
+      JSON.stringify(getFavoritesByKeyArray),
+    );
     window.dispatchEvent(new Event('favouritesUpdated'));
   };
 
@@ -58,8 +61,7 @@ export const ProductCard: React.FC<Props> = ({ card }) => {
     const getCartByKey = localStorage.getItem(`cart-${userId}`);
     const getCartByKeyArray = getCartByKey ? JSON.parse(getCartByKey) : [];
 
-    if (!getCartByKeyArray
-      .some(({ id }: Product) => id === card.id)) {
+    if (!getCartByKeyArray.some(({ id }: Product) => id === card.id)) {
       getCartByKeyArray.push({ ...card, quantity: 1 });
       setIsClicked(true);
     }
@@ -69,10 +71,7 @@ export const ProductCard: React.FC<Props> = ({ card }) => {
   };
 
   return (
-    <div
-      data-cy="cardsContainer"
-      className="card"
-    >
+    <div data-cy="cardsContainer" className="card">
       <Link to={`/phones/${card.itemId}`} className="card__image">
         <img
           src={API_PRODUCT_URL + card.image}
@@ -83,14 +82,8 @@ export const ProductCard: React.FC<Props> = ({ card }) => {
       <div className="card__body">
         <div className="card__title">{card.name}</div>
         <div className="card__prices prices">
-          <div className="prices__discount">
-            $
-            {card.price}
-          </div>
-          <div className="prices__full-price">
-            $
-            {card.fullPrice}
-          </div>
+          <div className="prices__discount">${card.price}</div>
+          <div className="prices__full-price">${card.fullPrice}</div>
         </div>
         <div className="card__description">
           <div className="card__screen card-screen">

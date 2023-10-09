@@ -3,9 +3,9 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { User } from '../types/User';
 
 type ProductsState = {
-  user: User | null,
-  loading: boolean,
-  error: string | null,
+  user: User | null;
+  loading: boolean;
+  error: string | null;
 };
 
 const InitialState: ProductsState = {

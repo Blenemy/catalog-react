@@ -1,7 +1,5 @@
 import { ProductDetails } from '../../../types/ProductDetails';
-import {
-  TextDescriptionTemplate,
-} from '../TextDescription/TextDescriptionTemplate';
+import { TextDescriptionTemplate } from '../TextDescription/TextDescriptionTemplate';
 
 interface TechSpec {
   key: keyof ProductDetails;
@@ -9,8 +7,8 @@ interface TechSpec {
 }
 
 type Props = {
-  productInfo: ProductDetails,
-  specs: TechSpec[],
+  productInfo: ProductDetails;
+  specs: TechSpec[];
 };
 
 export const TechSpecs: React.FC<Props> = ({ productInfo, specs }) => {
@@ -39,7 +37,7 @@ export const TechSpecs: React.FC<Props> = ({ productInfo, specs }) => {
 
   return (
     <>
-      {specs.map(spec => {
+      {specs.map((spec) => {
         return (
           <TextDescriptionTemplate
             key={spec.label}

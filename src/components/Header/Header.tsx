@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import {
-  Link, NavLink, useLocation, useSearchParams,
-} from 'react-router-dom';
+import { Link, NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import { useDebounce } from '../../helpers/useDebounce';
 import { getSearchWith } from '../../helpers/SearchParams';
 import favorite from '../../images/favourites.svg';
@@ -23,14 +21,14 @@ export const Header = () => {
   const [debouncedInputValue, setDebouncedInputValue] = useState(inputValue);
   const debouncedValue = useDebounce(debouncedInputValue, 300);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { user } = useAppSelector(state => state.user);
+  const { user } = useAppSelector((state) => state.user);
   const userId = user?.id;
 
-  const conditionToRender
-    = location.pathname === '/favourites'
-      || location.pathname === '/phones'
-      || location.pathname === '/tablets'
-      || location.pathname === '/accessories';
+  const conditionToRender =
+    location.pathname === '/favourites' ||
+    location.pathname === '/phones' ||
+    location.pathname === '/tablets' ||
+    location.pathname === '/accessories';
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -79,8 +77,9 @@ export const Header = () => {
   }, [query]);
 
   useEffect(() => {
-    const updatedSearchParams = getSearchWith(searchParams,
-      { query: debouncedValue || null });
+    const updatedSearchParams = getSearchWith(searchParams, {
+      query: debouncedValue || null,
+    });
 
     setSearchParams(new URLSearchParams(updatedSearchParams));
   }, [debouncedValue]);
@@ -91,10 +90,7 @@ export const Header = () => {
         <div className="navigation-header__left">
           <ul className="navigation-header__list navigation-header__list_left">
             <li className="navigation-header__item logo">
-              <Link
-                to="home"
-                className="navigation-header__link"
-              >
+              <Link to="home" className="navigation-header__link">
                 <img
                   className="navigation-header__image"
                   src={logo}
@@ -105,11 +101,11 @@ export const Header = () => {
             <li className="navigation-header__item_l">
               <NavLink
                 to="/"
-                className={({ isActive }) => classNames(
-                  'navigation-header__link', {
+                className={({ isActive }) =>
+                  classNames('navigation-header__link', {
                     'is-active-link': isActive,
-                  },
-                )}
+                  })
+                }
               >
                 Home
               </NavLink>
@@ -117,11 +113,11 @@ export const Header = () => {
             <li className="navigation-header__item_l">
               <NavLink
                 to="/phones"
-                className={({ isActive }) => classNames(
-                  'navigation-header__link', {
+                className={({ isActive }) =>
+                  classNames('navigation-header__link', {
                     'is-active-link': isActive,
-                  },
-                )}
+                  })
+                }
               >
                 Phones
               </NavLink>
@@ -129,11 +125,11 @@ export const Header = () => {
             <li className="navigation-header__item_l">
               <NavLink
                 to="/tablets"
-                className={({ isActive }) => classNames(
-                  'navigation-header__link', {
+                className={({ isActive }) =>
+                  classNames('navigation-header__link', {
                     'is-active-link': isActive,
-                  },
-                )}
+                  })
+                }
               >
                 Tablets
               </NavLink>
@@ -141,11 +137,11 @@ export const Header = () => {
             <li className="navigation-header__item_l">
               <NavLink
                 to="/accessories"
-                className={({ isActive }) => classNames(
-                  'navigation-header__link', {
+                className={({ isActive }) =>
+                  classNames('navigation-header__link', {
                     'is-active-link': isActive,
-                  },
-                )}
+                  })
+                }
               >
                 Accessories
               </NavLink>

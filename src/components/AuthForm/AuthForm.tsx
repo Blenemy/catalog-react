@@ -45,8 +45,7 @@ export const AuthForm = () => {
   };
 
   const registerUser = () => {
-    return createUser({ name, email })
-      .then(saveUser);
+    return createUser({ name, email }).then(saveUser);
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -94,7 +93,7 @@ export const AuthForm = () => {
             disabled={loading || needToRegister}
             value={email}
             required
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <span className="icon is-small is-left">
@@ -129,7 +128,7 @@ export const AuthForm = () => {
               minLength={4}
               disabled={loading}
               value={name}
-              onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
 
             <span className="icon is-small is-left">

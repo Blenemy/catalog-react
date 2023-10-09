@@ -3,9 +3,9 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ProductDetails } from '../types/ProductDetails';
 
 type ProductInfoState = {
-  productInfo: ProductDetails | null,
-  selectedCapacity: string | null,
-  selectedColor: string | null,
+  productInfo: ProductDetails | null;
+  selectedCapacity: string | null;
+  selectedColor: string | null;
 };
 
 const InitialState: ProductInfoState = {

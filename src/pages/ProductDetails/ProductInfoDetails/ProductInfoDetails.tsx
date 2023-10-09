@@ -11,26 +11,27 @@ import { setCapacity, setColor } from '../../../features/productInfoSlice';
 
 export const ProductInfoDetails = () => {
   const dispatch = useAppDispatch();
-  const { products } = useAppSelector(state => state.products);
-  const {
-    productInfo,
-    selectedCapacity,
-    selectedColor,
-  } = useAppSelector(state => state.productInfo);
+  const { products } = useAppSelector((state) => state.products);
+  const { productInfo, selectedCapacity, selectedColor } = useAppSelector(
+    (state) => state.productInfo,
+  );
   const [isClicked, setIsClicked] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-  const [mainImage, setMainImage]
-    = useState(API_PRODUCT_URL + productInfo?.images[0]);
+  const [mainImage, setMainImage] = useState(
+    API_PRODUCT_URL + productInfo?.images[0],
+  );
 
-  const productToAdd = products
-    .find(product => product.phoneId === productInfo?.id);
+  const productToAdd = products.find(
+    (product) => product.phoneId === productInfo?.id,
+  );
 
   const saveFavouriteOnClick = () => {
     const favourites = localStorage.getItem('favourites');
     const favouritesArray = favourites ? JSON.parse(favourites) : [];
 
-    const favouriteProductToAdd = products
-      .find(product => product.phoneId === productInfo?.id);
+    const favouriteProductToAdd = products.find(
+      (product) => product.phoneId === productInfo?.id,
+    );
 
     if (favouriteProductToAdd) {
       const index = favouritesArray
@@ -54,9 +55,10 @@ export const ProductInfoDetails = () => {
     const cart = localStorage.getItem('cart');
     const cartArray = cart ? JSON.parse(cart) : [];
 
-    if (!productToAdd || cartArray.some(
-      (product: Product) => product.id === productToAdd.id,
-    )) {
+    if (
+      !productToAdd ||
+      cartArray.some((product: Product) => product.id === productToAdd.id)
+    ) {
       return;
     }
 
@@ -68,7 +70,8 @@ export const ProductInfoDetails = () => {
   };
 
   const handleChangeMainImage = (
-    event: React.SyntheticEvent, value: string,
+    event: React.SyntheticEvent,
+    value: string,
   ) => {
     event?.preventDefault();
     setMainImage(value);
@@ -83,8 +86,9 @@ export const ProductInfoDetails = () => {
   useEffect(() => {
     setMainImage(API_PRODUCT_URL + productInfo?.images[0]);
 
-    const productsToAdd = products
-      .find(product => product.phoneId === productInfo?.id);
+    const productsToAdd = products.find(
+      (product) => product.phoneId === productInfo?.id,
+    );
 
     if (!productsToAdd) {
       return;
@@ -92,13 +96,17 @@ export const ProductInfoDetails = () => {
 
     const favouritesArray = getLocalStorageItems('favourites');
 
-    setIsAdded(favouritesArray
-      .some((product: Product) => product.id === productsToAdd.id));
+    setIsAdded(
+      favouritesArray.some(
+        (product: Product) => product.id === productsToAdd.id,
+      ),
+    );
 
     const cartArray = getLocalStorageItems('cart');
 
-    setIsClicked(cartArray
-      .some((product: Product) => product.id === productsToAdd.id));
+    setIsClicked(
+      cartArray.some((product: Product) => product.id === productsToAdd.id),
+    );
   }, [productInfo, products]);
 
   if (!productInfo) {
@@ -114,20 +122,16 @@ export const ProductInfoDetails = () => {
           product-info__column_small
         "
       >
-        {productInfo.images.map(item => (
+        {productInfo.images.map((item) => (
           // eslint-disable-next-line
           <div
             key={item}
             className="product-details__image"
-            onClick={(event) => handleChangeMainImage(
-              event,
-              API_PRODUCT_URL + item,
-            )}
+            onClick={(event) =>
+              handleChangeMainImage(event, API_PRODUCT_URL + item)
+            }
           >
-            <button
-              className="product-details__image-link"
-              type="button"
-            >
+            <button className="product-details__image-link" type="button">
               <img
                 src={API_PRODUCT_URL + item}
                 alt="ProductSmallImage"
@@ -139,9 +143,7 @@ export const ProductInfoDetails = () => {
       </div>
       <div className="product-info__column">
         <div className="product-info__main-image">
-          <div
-            className="product-info__main-image-link"
-          >
+          <div className="product-info__main-image-link">
             <img
               src={mainImage}
               alt="MainProductImage"
@@ -174,12 +176,15 @@ export const ProductInfoDetails = () => {
           Select capacity
         </div>
         <div className="product-details-description__capacity">
-          {productInfo.capacityAvailable.map(button => (
+          {productInfo.capacityAvailable.map((button) => (
             <Link
-              to={`/phones/${productInfo.namespaceId}-${button.toLowerCase()}-${productInfo.color}`}
+              to={`/phones/${productInfo.namespaceId}-${button.toLowerCase()}-${
+                productInfo.color
+              }`}
               key={button}
               className={classNames(
-                'product-details-description__capacity-available', {
+                'product-details-description__capacity-available',
+                {
                   'active-capacity': selectedCapacity === button,
                 },
               )}
@@ -190,14 +195,8 @@ export const ProductInfoDetails = () => {
           ))}
         </div>
         <div className="prices">
-          <div className="prices__discount">
-            $
-            {productInfo.priceDiscount}
-          </div>
-          <div className="prices__full-price">
-            $
-            {productInfo.priceRegular}
-          </div>
+          <div className="prices__discount">${productInfo.priceDiscount}</div>
+          <div className="prices__full-price">${productInfo.priceRegular}</div>
         </div>
         <div className="product-details-description__footer">
           <button
@@ -236,15 +235,14 @@ export const ProductInfoDetails = () => {
           ]}
         />
       </div>
-      <div className="
+      <div
+        className="
         product-info__column
         product-details
         product-info__column_small
       "
       >
-        ID:
-        {' '}
-        {productInfo.namespaceId}
+        ID: {productInfo.namespaceId}
       </div>
     </section>
   );

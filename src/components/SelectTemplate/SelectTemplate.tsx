@@ -3,19 +3,24 @@ import { SortOption } from '../../types/SortOption';
 import './SelectTemplate.scss';
 
 type Props = {
-  category: string,
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
-  value: SortOption | ItemsPerPage,
-  sortBy: string,
+  category: string;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  value: SortOption | ItemsPerPage;
+  sortBy: string;
 };
 
 export const SelectTemplate: React.FC<Props> = ({
-  category, onChange, value, sortBy,
+  category,
+  onChange,
+  value,
+  sortBy,
 }) => {
   if (sortBy === 'age') {
     return (
       <div className={`${category}-page__sort-by`}>
-        <label className={`${category}-page__label`} htmlFor="sort-by">Sort by:</label>
+        <label className={`${category}-page__label`} htmlFor="sort-by">
+          Sort by:
+        </label>
         <select
           className={`${category}-page__select`}
           id="sort-by"
@@ -33,7 +38,9 @@ export const SelectTemplate: React.FC<Props> = ({
 
   return (
     <div className={`${category}-page__items-per-page`}>
-      <label className={`${category}-page__label`} htmlFor="items-per-page">Items per page:</label>
+      <label className={`${category}-page__label`} htmlFor="items-per-page">
+        Items per page:
+      </label>
       <select
         className={`${category}-page__select`}
         id="items-per-page"

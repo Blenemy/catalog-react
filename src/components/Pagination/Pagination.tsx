@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import './Pagination.scss';
 
 type Props = {
-  totalPages: number,
-  currentPage: number,
-  handlePageChange: (newPage: number) => void,
-  category: string,
+  totalPages: number;
+  currentPage: number;
+  handlePageChange: (newPage: number) => void;
+  category: string;
 };
 
 export const Pagination: React.FC<Props> = ({
@@ -47,7 +47,10 @@ export const Pagination: React.FC<Props> = ({
   }
 
   return (
-    <div data-cy="pagination" className={`${category}-page__pagination pagination`}>
+    <div
+      data-cy="pagination"
+      className={`${category}-page__pagination pagination`}
+    >
       <button
         type="button"
         onClick={() => handlePageChange(currentPage - 1)}
@@ -58,31 +61,29 @@ export const Pagination: React.FC<Props> = ({
         &lt;
       </button>
 
-      {pages.map((page, index) => (
-        typeof page === 'number'
-          ? (
-            <button
-              type="button"
-              // eslint-disable-next-line react/no-array-index-key
-              key={`${page}_${index}`}
-              onClick={() => handlePageChange(page)}
-              className={classNames('pagination__button', {
-                active: currentPage === page,
-              })}
-            >
-              {page}
-            </button>
-          )
-          : (
-            <div
-              // eslint-disable-next-line react/no-array-index-key
-              key={`${page}_${index}`}
-              className="dots"
-            >
-              ...
-            </div>
-          )
-      ))}
+      {pages.map((page, index) =>
+        typeof page === 'number' ? (
+          <button
+            type="button"
+            // eslint-disable-next-line react/no-array-index-key
+            key={`${page}_${index}`}
+            onClick={() => handlePageChange(page)}
+            className={classNames('pagination__button', {
+              active: currentPage === page,
+            })}
+          >
+            {page}
+          </button>
+        ) : (
+          <div
+            // eslint-disable-next-line react/no-array-index-key
+            key={`${page}_${index}`}
+            className="dots"
+          >
+            ...
+          </div>
+        ),
+      )}
 
       <button
         type="button"
