@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
-import { PageIndicator } from '../../components/PageIndicator/PageIndicator';
 import { Product } from '../../types/Products';
 import { NoResults } from '../../components/NoResults/NoResults';
 import { useAppSelector } from '../../app/hooks';
+import { BackToPage } from '../../components/BackToPage/BackToPage';
 
 export const Favoutires: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -27,7 +27,7 @@ export const Favoutires: React.FC = () => {
   return (
     <main className="phones-page">
       <div className="phones-page__container">
-        <PageIndicator productType="Favourites" />
+        <BackToPage />
         <div className="phones-page__title">Favourites</div>
         <div className="phones-page__subtitle">
           {filteredByQueryPhones.length} models

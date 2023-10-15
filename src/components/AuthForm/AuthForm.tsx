@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { createUser, getUserByEmail } from '../api/users';
 import { User } from '../../types/User';
 import { useAppDispatch } from '../../app/hooks';
@@ -18,7 +18,7 @@ export const AuthForm = () => {
     dispatch(setUser(user));
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const userData = localStorage.getItem('user');
 
     if (!userData) {

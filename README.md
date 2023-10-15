@@ -4,14 +4,14 @@ React Phone Catalog is a small online storefront showcasing mobile phones, built
 
 # Technologies Used
 
-React: A JavaScript library for building user interfaces.
-React Router: A collection of navigational components that compose declaratively with your application. Specifically, hash routing has been implemented, offering a client-side routing method using URL hash fragments.
-Redux Toolkit: The official, opinionated, batteries-included toolset for efficient Redux development.
-TypeScript: A typed superset of JavaScript that adds optional static types.
-SCSS/BEM: A professional grade CSS extension language.
-Bulma: A modern CSS framework based on Flexbox.
-LocalStorage: Used for persisting user session data.
-REST API: Integration for data fetching and management.
+- **React:** Used for efficient and interactive UIs by reusing components and managing state.
+- **React Router**: Implemented hash routing to enable client-side navigation without full page reloads.
+- **Redux Toolkit**: Simplifies complex state logic, improves maintainability and optimizes performance.
+- **TypeScript:** Enhances code quality and understandability through static typing.
+- **SCSS/BEM**: Ensures scalable and maintainable styling.
+- **Bulma:** Provides a Flexbox-based layout system for quick and responsive design.
+- **LocalStorage:** Stores session data on the client side for a better user experience.
+- **REST API**: Fetches and manipulates data from a server, decoupling the frontend and backend.
 
 # Viewing Recommendations
 

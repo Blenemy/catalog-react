@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { BackToPage } from '../BackToPage/BackToPage';
-import { CartDescription } from '../CartDescription/CartDescription';
+import { BackToPage } from '../../components/BackToPage/BackToPage';
+// eslint-disable-next-line max-len
+import { CartDescription } from '../../components/CartDescription/CartDescription';
 import { Product } from '../../types/Products';
-import './Cart.scss';
-import { NoResults } from '../NoResults/NoResults';
+import './CartPage.scss';
+import { NoResults } from '../../components/NoResults/NoResults';
 import { useAppSelector } from '../../app/hooks';
 
-export const Cart: React.FC = () => {
+export const CartPage: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
   const userId = user?.id;
   const retrievedData = localStorage.getItem(`cart-${userId}`);

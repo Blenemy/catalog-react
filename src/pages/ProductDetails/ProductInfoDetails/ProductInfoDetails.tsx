@@ -11,6 +11,8 @@ import { setCapacity, setColor } from '../../../features/productInfoSlice';
 
 export const ProductInfoDetails = () => {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
+  const userId = user?.id;
   const { products } = useAppSelector((state) => state.products);
   const { productInfo, selectedCapacity, selectedColor } = useAppSelector(
     (state) => state.productInfo,
@@ -26,7 +28,7 @@ export const ProductInfoDetails = () => {
   );
 
   const saveFavouriteOnClick = () => {
-    const favourites = localStorage.getItem('favourites');
+    const favourites = localStorage.getItem(`favourites-${userId}`);
     const favouritesArray = favourites ? JSON.parse(favourites) : [];
 
     const favouriteProductToAdd = products.find(
@@ -36,7 +38,10 @@ export const ProductInfoDetails = () => {
     if (favouriteProductToAdd) {
       const index = favouritesArray
         // eslint-disable-next-line
-        .findIndex((existingProduct: Product) => existingProduct.id === favouriteProductToAdd.id,);
+        .findIndex(
+          (existingProduct: Product) =>
+            existingProduct.id === favouriteProductToAdd.id,
+        );
 
       if (index === -1) {
         favouritesArray.push(favouriteProductToAdd);
@@ -46,13 +51,16 @@ export const ProductInfoDetails = () => {
         setIsAdded(false);
       }
 
-      localStorage.setItem('favourites', JSON.stringify(favouritesArray));
+      localStorage.setItem(
+        `favourites-${userId}`,
+        JSON.stringify(favouritesArray),
+      );
       window.dispatchEvent(new Event('favouritesUpdated'));
     }
   };
 
   const saveCartOnClick = () => {
-    const cart = localStorage.getItem('cart');
+    const cart = localStorage.getItem(`cart-${userId}`);
     const cartArray = cart ? JSON.parse(cart) : [];
 
     if (
@@ -65,7 +73,7 @@ export const ProductInfoDetails = () => {
     cartArray.push({ ...productToAdd, quantity: 1 });
     setIsClicked(true);
 
-    localStorage.setItem('cart', JSON.stringify(cartArray));
+    localStorage.setItem(`cart-${userId}`, JSON.stringify(cartArray));
     window.dispatchEvent(new Event('cartUpdated'));
   };
 
@@ -160,7 +168,9 @@ export const ProductInfoDetails = () => {
           {productInfo.colorsAvailable.map((color) => (
             <Link
               // eslint-disable-next-line
-              to={`/phones/${productInfo.namespaceId}-${productInfo.capacity.toLowerCase()}-${color.toLowerCase()}`}
+              to={`/phones/${
+                productInfo.namespaceId
+              }-${productInfo.capacity.toLowerCase()}-${color.toLowerCase()}`}
               key={color}
               className={classNames('product-details-description__color', {
                 'active-color': selectedColor === color,

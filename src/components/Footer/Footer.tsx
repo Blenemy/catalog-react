@@ -18,21 +18,21 @@ export const Footer = () => {
         <div className="footer__links">
           <a
             className="footer__link"
-            href="https://github.com/mate-academy"
+            href="https://github.com/Blenemy"
             target="blank"
           >
             Github
           </a>
           <a
             className="footer__link"
-            href="https://github.com/mate-academy"
+            href="https://github.com/Blenemy"
             target="blank"
           >
             Contacts
           </a>
           <a
             className="footer__link"
-            href="https://github.com/mate-academy"
+            href="https://github.com/Blenemy"
             target="blank"
           >
             Rights
